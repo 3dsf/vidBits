@@ -13,8 +13,9 @@ def progress(value, max=100):
         </progress>
     """.format(value=value, max=max))
 
+
 ### Get video stats using ffmpeg output
-def GVS(iVid):
+def gvs(iVid):
     AUDIO = False
     process = subprocess.Popen(['ffmpeg', '-hide_banner', '-i', iVid, '-y' ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,universal_newlines=True)
     for line in process.stdout:
