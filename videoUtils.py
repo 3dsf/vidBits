@@ -39,11 +39,11 @@ def getVideoStats(iVid):
     if 'Audio:' in line:
         AUDIO = True
 
-print('fps = ', str(fps))
-print('width = ', str(width))
-print('height = ', str(height))
-print('seconds = ', str(seconds))
-print('AUDIO = ', AUDIO)
+    print('fps = ', str(fps))
+    print('width = ', str(width))
+    print('height = ', str(height))
+    print('seconds = ', str(seconds))
+    print('AUDIO = ', AUDIO)
 
 ### Functions based on ffmpeg-python video tensorflow example
 def readFrameAsNp(ffmpegDecode, width, height):
