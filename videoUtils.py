@@ -13,6 +13,38 @@ def progress(value, max=100):
         </progress>
     """.format(value=value, max=max))
 
+### Get video stats using ffmpeg output
+def getVideoStats(iVid):
+    AUDIO = False
+    process = subprocess.Popen(['ffmpeg', '-hide_banner', '-i', iVid, '-y' ], stdout=subprocess.PIPE, stderr=subprocess.STDOUT,universal_newlines=True)
+    for line in process.stdout:
+    print(line)
+    if ' Video:' in line:
+        l_split = line.split(',')
+        #print('---------printing line ", line)
+        for segment in l_split[1:]:
+            if 'fps' in segment:
+                    s = segment.strip().split(' ')
+                    fps = float(s[0])
+            if 'x' in segment:
+                    s = segment.strip().split('x')
+                    width = int(s[0])
+                    s2 = s[1].split(' ')
+                    height = int(s2[0])
+    if 'Duration:' in line:
+        s = line.split(',')
+        ss = s[0].split(' ')
+        sss = ss[3].strip().split(':')
+        seconds = float(sss[0])*60*60 + float(sss[1])*60 + float(sss[2])
+    if 'Audio:' in line:
+        AUDIO = True
+
+print('fps = ', str(fps))
+print('width = ', str(width))
+print('height = ', str(height))
+print('seconds = ', str(seconds))
+print('AUDIO = ', AUDIO)
+
 ### Functions based on ffmpeg-python video tensorflow example
 def readFrameAsNp(ffmpegDecode, width, height):
     logger.debug('Reading frame')
